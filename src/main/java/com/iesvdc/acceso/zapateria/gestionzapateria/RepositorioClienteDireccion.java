@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author Juangu <jgutierrez at iesvirgendelcarmen.coms>
  */
 @Repository
-public interface RepositorioDireccion extends JpaRepository<ClienteDireccion, Long> {
+public interface RepositorioClienteDireccion extends JpaRepository<ClienteDireccion, Long> {
     
 }

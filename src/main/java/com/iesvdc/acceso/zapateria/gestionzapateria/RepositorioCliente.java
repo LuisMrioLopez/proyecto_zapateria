@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  * @author profesor
  */
 @Repository
-public interface RepositorioClientes extends JpaRepository<Cliente, Long> {
+public interface RepositorioCliente extends JpaRepository<Cliente, Long> {
     
 }

@@ -2,6 +2,8 @@
 DROP TABLE IF EXISTS cliente_direccion;
 DROP TABLE IF EXISTS cliente;
 DROP TABLE IF EXISTS cod_pos;
+DROP TABLE IF EXISTS empleado;
+DROP TABLE IF EXISTS empleado_direccion;
 
 --
 -- TABLE: cod_pos
@@ -40,9 +42,35 @@ CREATE TABLE cliente_direccion (
 );
 
 
+--
+-- TABLE: empleado
+--
+--
+CREATE TABLE empleado (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(40) NOT NULL ,
+  apellidos VARCHAR(100) NOT NULL ,
+  dni INT NOT NULL
+);
+
+
+--
+-- TABLE: empleado_direccion
+--
+--
+
+CREATE TABLE empleado_direccion (
+  id_direccion INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100),
+  id_empleado int REFERENCES empleado(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  nombre_via VARCHAR(150) NOT NULL ,
+  cp int REFERENCES cod_pos(cp) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+
 INSERT INTO `cliente` (`id`, `nombre`, `apellidos`, `dni`) VALUES
 (1, 'Pepe', 'Perez Martinez', 12345678),
-(2, 'Miguel Angel', 'Gutierrez Garcia', 87654321)
+(2, 'Miguel Angel', 'Gutierrez Garcia', 87654321),
 (3, 'Juan', 'Sin Miedo', 11223344);
 
 INSERT INTO `cod_pos` (`cp`, `localidad`) VALUES
@@ -54,5 +82,18 @@ INSERT INTO `cliente_direccion` (`nombre`, `id_direccion`, `id_cliente`, `nombre
 ('Mi casa', 1, 1, 'Paseo de la Estación 44', 23008),
 ('Casa', 2, 2, 'Rue del Percebe 13', 23005),
 ('Playa', 3, 2, 'Rue del Percebe 13', 29000),
-('Oficina', 1, 3, 'Avenida de Andalucia S/N', 29000);
+('Oficina', 4, 3, 'Avenida de Andalucia S/N', 29000);
+
+
+INSERT INTO `empleado` (`id`, `nombre`, `apellidos`, `dni`) VALUES
+(1, 'Juan Diego', 'Sánchez Prieto', 12348978),
+(2, 'Antonio', 'Ramírez Guzman', 81244321)
+(3, 'Pedro', 'Con Miedo', 63223385);
+
+
+INSERT INTO `empleado_direccion` (`nombre`, `id_direccion`, `id_empleado`, `nombre_via`, `cp`) VALUES
+('Chalet en la montaña', 1, 1, 'Paseo de las ovejas 8', 23008),
+('Casa chica', 2, 2, 'Las Chozas 13', 23005),
+('Playa sin agua', 3, 2, 'Rue del Percebe 13', 29000),
+('Río mojado', 4, 3, 'Avenida de Andalucia S/N', 29000);
 
